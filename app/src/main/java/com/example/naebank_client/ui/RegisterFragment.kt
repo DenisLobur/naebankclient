@@ -1,4 +1,4 @@
-package com.example.naebank_client
+package com.example.naebank_client.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.example.naebank_client.R
 import com.example.naebank_client.databinding.FragmentRegisterBinding
 
 class RegisterFragment : Fragment() {

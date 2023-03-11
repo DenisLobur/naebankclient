@@ -1,4 +1,4 @@
-package com.example.naebank_client
+package com.example.naebank_client.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
