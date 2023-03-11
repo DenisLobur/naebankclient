@@ -22,7 +22,7 @@ class Repo(val api: ApiService, val errorParser: ErrorParser) {
         )
       },
       onResult = {
-        Success(it)
+        Success(it.response)
       }
     ).request()
   }

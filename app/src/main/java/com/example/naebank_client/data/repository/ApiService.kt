@@ -10,5 +10,5 @@ interface ApiService {
   @POST("/auth/register")
   suspend fun register(
     @Body request: Data.RegisterRequest
-  ): Response<String>
+  ): Response<Data.RegisterResponse>
 }

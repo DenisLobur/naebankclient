@@ -1,6 +1,7 @@
 package com.example.naebank_client.di
 
 import com.example.naebank_client.ErrorParser
+import com.example.naebank_client.GsonProvider
 import com.example.naebank_client.data.repository.ApiService
 import com.example.naebank_client.data.repository.Repo
 import com.example.naebank_client.viewmodel.MainViewModel
@@ -21,7 +22,7 @@ val repoModule = module {
 val remoteModule = module {
   single<Retrofit> {
     Retrofit.Builder()
-      .baseUrl("localhost:8080")
+      .baseUrl("http://10.0.2.2:8080/")
       .addConverterFactory(GsonConverterFactory.create())
       .build()
   }
@@ -30,7 +31,7 @@ val remoteModule = module {
 }
 
 val errorModule = module {
-  single { GsonBuilder() }
+  single { GsonProvider().provide() }
   single { ErrorParser(gson = get()) }
 }
 

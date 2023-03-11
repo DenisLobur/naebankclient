@@ -10,4 +10,8 @@ object Data {
     @SerializedName("name") val name: String,
     @SerializedName("role") val role: String
   )
+
+  data class RegisterResponse(
+    @SerializedName("response") val response: String
+  )
 }
