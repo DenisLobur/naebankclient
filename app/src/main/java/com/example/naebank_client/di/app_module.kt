@@ -1,8 +1,10 @@
 package com.example.naebank_client.di
 
-import com.example.naebank_client.repository.ApiService
-import com.example.naebank_client.repository.Repo
+import com.example.naebank_client.ErrorParser
+import com.example.naebank_client.data.repository.ApiService
+import com.example.naebank_client.data.repository.Repo
 import com.example.naebank_client.viewmodel.MainViewModel
+import com.google.gson.GsonBuilder
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -13,7 +15,7 @@ val viewModelModule = module {
 }
 
 val repoModule = module {
-  factory<Repo> { Repo(get()) }
+  factory<Repo> { Repo(get(), get()) }
 }
 
 val remoteModule = module {
@@ -27,4 +29,9 @@ val remoteModule = module {
   single<ApiService> { get<Retrofit>().create(ApiService::class.java) }
 }
 
-val appModule = listOf(viewModelModule, repoModule, remoteModule)
+val errorModule = module {
+  single { GsonBuilder() }
+  single { ErrorParser(gson = get()) }
+}
+
+val appModule = listOf(viewModelModule, repoModule, remoteModule, errorModule)

@@ -4,10 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ui.MainActivity">
 
+  <data>
+
+    <variable
+        name="vm"
+        type="com.example.naebank_client.viewmodel.MainViewModel" />
+  </data>
+
   <androidx.constraintlayout.widget.ConstraintLayout
       android:layout_width="match_parent"
       android:layout_height="match_parent">
-
 
     <fragment
         android:id="@+id/nav_host_fragment_content_main"
@@ -20,5 +26,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:navGraph="@navigation/nav_graph" />
+
+    <FrameLayout
+        android:id="@+id/progress"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/semi_transparent"
+        android:focusableInTouchMode="true"
+        app:visibleOrGone="@{vm.isLoading}"
+        tools:visibility="gone">
+
+      <ProgressBar
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center" />
+    </FrameLayout>
   </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

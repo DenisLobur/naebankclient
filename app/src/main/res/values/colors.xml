@@ -11,4 +11,5 @@
   <color name="cornflower_blue">#4285F4</color>
   <color name="cornflower_blue_40">#644285F4</color>
   <color name="periwinkle_gray">#B6C6E5</color>
+  <color name="semi_transparent">#50000000</color>
 </resources>
