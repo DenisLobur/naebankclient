@@ -5,6 +5,7 @@ import androidx.databinding.ObservableBoolean
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.naebank_client.HttpProvider
 import com.example.naebank_client.data.Data
 import com.example.naebank_client.data.repository.Repo
 import kotlinx.coroutines.launch
@@ -41,6 +42,7 @@ class MainViewModel(val repo: Repo) : ViewModel() {
       when (val login = repo.loginUser(email, password)) {
         is Success -> {
           onLoginResult.value = login.data!!
+          HttpProvider.authHeader = login.data.response
         }
         is Error -> {
           onError.value = login.toString()
