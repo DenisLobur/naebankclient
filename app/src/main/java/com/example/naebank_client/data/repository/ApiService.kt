@@ -16,8 +16,16 @@ interface ApiService {
   @POST("auth/login")
   suspend fun login(
     @Body request: Data.LoginRequest
-  ): Response<Data.LoginResponse>
+  ): Response<Data.GeneralResponse>
 
   @GET("users/current")
   suspend fun getCurrentUser(): Response<Data.UserResponse>
+
+  @GET("cards")
+  suspend fun getCards(): Response<List<Data.CardResponse>>
+
+  @POST("cards")
+  suspend fun addCard(
+    @Body request: Data.CardRequest
+  ): Response<Data.GeneralResponse>
 }

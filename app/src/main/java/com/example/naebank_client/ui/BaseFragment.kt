@@ -10,6 +10,8 @@ abstract class BaseFragment: Fragment() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
 
-    vm = (requireActivity() as MainActivity).getVM()
+    vm = (requireActivity() as BaseActivity).getVM()
   }
+
+
 }

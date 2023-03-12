@@ -9,6 +9,8 @@ class GsonProvider : Provider<Gson> {
   override fun provide(): Gson = gson
 
   val gson: Gson = GsonBuilder()
+    .setLenient()
+    .setPrettyPrinting()
     .create()
 
 }

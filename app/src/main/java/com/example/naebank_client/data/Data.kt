@@ -17,12 +17,21 @@ object Data {
     @SerializedName("password") val password: String
   )
 
-  // Response
-  data class RegisterResponse(
-    @SerializedName("response") val response: String
+  data class CardRequest(
+    @SerializedName("type") val type: String,
+    @SerializedName("cardMask") val mask: String,
+    @SerializedName("expMonth") val expMonth: Int,
+    @SerializedName("expYear") val expYear: Int,
+    @SerializedName("isDefault") val isDefault: Boolean
   )
 
-  data class LoginResponse(
+  // Response
+  data class RegisterResponse(
+    @SerializedName("response") val response: String,
+    @SerializedName("error") val error: String?
+  )
+
+  data class GeneralResponse(
     @SerializedName("response") val response: String,
     @SerializedName("error") val error: String?
   )
@@ -31,5 +40,14 @@ object Data {
     @SerializedName("name") val name: String,
     @SerializedName("email") val email: String,
     @SerializedName("role") val role: String
+  )
+
+  data class CardResponse(
+    @SerializedName("id") val id: Long,
+    @SerializedName("type") val type: String,
+    @SerializedName("cardMask") val mask: String,
+    @SerializedName("expMonth") val expMonth: Int,
+    @SerializedName("expYear") val expYear: Int,
+    @SerializedName("isDefault") val isDefault: Boolean
   )
 }

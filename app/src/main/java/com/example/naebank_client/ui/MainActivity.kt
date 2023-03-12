@@ -9,10 +9,9 @@ import com.example.naebank_client.databinding.ActivityMainBinding
 import com.example.naebank_client.viewmodel.MainViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MainActivity : AppCompatActivity(), LifecycleOwner {
+class MainActivity : BaseActivity() {
 
   private lateinit var binding: ActivityMainBinding
-  private val mainVM: MainViewModel by viewModel()
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -26,7 +25,14 @@ class MainActivity : AppCompatActivity(), LifecycleOwner {
     val navController = findNavController(R.id.nav_host_fragment_content_main)
   }
 
-  fun getVM(): MainViewModel {
-    return mainVM
-  }
+
+
+//  fun topUpFragment(fragment: BaseFragment, addToBackStack: Boolean) {
+//    val ft = supportFragmentManager.beginTransaction()
+//    ft.add(R.id.content, fragment, tag)
+//    if (addToBackStack) {
+//      ft.addToBackStack(null)
+//    }
+//    ft.commitAllowingStateLoss()
+//  }
 }

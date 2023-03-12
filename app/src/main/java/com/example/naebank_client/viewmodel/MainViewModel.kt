@@ -14,9 +14,11 @@ class MainViewModel(val repo: Repo) : ViewModel() {
 
   val isLoading: ObservableBoolean = ObservableBoolean(false)
   val onError = MutableLiveData<String>()
-  val onRegisterResult = MutableLiveData<String?>()
-  val onLoginResult = MutableLiveData<Data.LoginResponse>()
+  val onRegisterResult = MutableLiveData<Data.RegisterResponse>()
+  val onLoginResult = MutableLiveData<Data.GeneralResponse?>()
   val onCurrentUser = MutableLiveData<Data.UserResponse>()
+  val onCardsResult = MutableLiveData<List<Data.CardResponse>>()
+  val onCardAdded = MutableLiveData<Data.GeneralResponse?>()
 
   fun registerUser(name: String, email: String, password: String) {
     isLoading.set(true)
@@ -24,7 +26,8 @@ class MainViewModel(val repo: Repo) : ViewModel() {
     viewModelScope.launch {
       when (val register = repo.registerUser(name, email, password)) {
         is Success -> {
-          onRegisterResult.value = register.data
+          onRegisterResult.value = register.data!!
+          HttpProvider.authHeader = register.data.response
         }
         is Error -> {
           onError.value = register.toString()
@@ -63,6 +66,40 @@ class MainViewModel(val repo: Repo) : ViewModel() {
         }
         is Error -> {
           onError.value = user.toString()
+        }
+      }
+
+      isLoading.set(false)
+    }
+  }
+
+  fun getCards() {
+    isLoading.set(true)
+
+    viewModelScope.launch {
+      when (val cards = repo.getCards()) {
+        is Success -> {
+          onCardsResult.value = cards.data!!
+        }
+        is Error -> {
+          onError.value = cards.toString()
+        }
+      }
+
+      isLoading.set(false)
+    }
+  }
+
+  fun addCard(type: String, mask: String, expMonth: Int, expYear: Int, isDefault: Boolean) {
+    isLoading.set(true)
+
+    viewModelScope.launch {
+      when (val card = repo.addCard(type, mask, expMonth, expYear, isDefault)) {
+        is Success -> {
+          onCardAdded.value = card.data
+        }
+        is Error -> {
+          onError.value = card.toString()
         }
       }
 

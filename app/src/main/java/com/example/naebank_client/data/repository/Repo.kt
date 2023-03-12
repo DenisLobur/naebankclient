@@ -22,7 +22,7 @@ class Repo(val api: ApiService, val errorParser: ErrorParser) {
         )
       },
       onResult = {
-        Success(it.response)
+        Success(it)
       }
     ).request()
   }
@@ -49,6 +49,34 @@ class Repo(val api: ApiService, val errorParser: ErrorParser) {
       errorParser = errorParser,
       onRequest = {
         api.getCurrentUser()
+      },
+      onResult = {
+        Success(it)
+      }
+    ).request()
+  }
+
+  suspend fun getCards() = withContext(Dispatchers.IO) {
+    RequestHandler(
+      errorParser = errorParser,
+      onRequest = {
+        api.getCards()
+      },
+      onResult = {
+        Success(it)
+      }
+    ).request()
+  }
+
+  suspend fun addCard(type: String, mask: String, expMonth: Int, expYear: Int, isDefault: Boolean) = withContext(Dispatchers.IO) {
+    RequestHandler(
+      errorParser = errorParser,
+      onRequest = {
+        api.addCard(
+          Data.CardRequest(
+            type, mask, expMonth, expYear, isDefault
+          )
+        )
       },
       onResult = {
         Success(it)
