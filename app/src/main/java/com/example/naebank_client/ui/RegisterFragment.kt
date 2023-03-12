@@ -11,15 +11,13 @@ import com.example.naebank_client.R
 import com.example.naebank_client.databinding.FragmentRegisterBinding
 import com.example.naebank_client.viewmodel.MainViewModel
 
-class RegisterFragment : Fragment() {
+class RegisterFragment : BaseFragment() {
 
   private lateinit var binding: FragmentRegisterBinding
-  private lateinit var vm: MainViewModel
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
     binding = FragmentRegisterBinding.inflate(inflater, container, false)
 
-    vm = (requireActivity() as MainActivity).getVM()
     vm.onRegisterResult.observe(viewLifecycleOwner) {
       Log.d("denys", "result: $it")
       findNavController().navigate(R.id.action_RegisterFragment_to_PageableFragment)

@@ -44,4 +44,16 @@ class Repo(val api: ApiService, val errorParser: ErrorParser) {
     ).request()
   }
 
+  suspend fun getUser() = withContext(Dispatchers.IO) {
+    RequestHandler(
+      errorParser = errorParser,
+      onRequest = {
+        api.getCurrentUser()
+      },
+      onResult = {
+        Success(it)
+      }
+    ).request()
+  }
+
 }

@@ -15,6 +15,7 @@ class MainViewModel(val repo: Repo) : ViewModel() {
   val onError = MutableLiveData<String>()
   val onRegisterResult = MutableLiveData<String?>()
   val onLoginResult = MutableLiveData<Data.LoginResponse>()
+  val onCurrentUser = MutableLiveData<Data.UserResponse>()
 
   fun registerUser(name: String, email: String, password: String) {
     isLoading.set(true)
@@ -43,6 +44,23 @@ class MainViewModel(val repo: Repo) : ViewModel() {
         }
         is Error -> {
           onError.value = login.toString()
+        }
+      }
+
+      isLoading.set(false)
+    }
+  }
+
+  fun getUser() {
+    isLoading.set(true)
+
+    viewModelScope.launch {
+      when (val user = repo.getUser()) {
+        is Success -> {
+          onCurrentUser.value = user.data!!
+        }
+        is Error -> {
+          onError.value = user.toString()
         }
       }
 

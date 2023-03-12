@@ -17,7 +17,6 @@ object Data {
     @SerializedName("password") val password: String
   )
 
-
   // Response
   data class RegisterResponse(
     @SerializedName("response") val response: String
@@ -26,5 +25,11 @@ object Data {
   data class LoginResponse(
     @SerializedName("response") val response: String,
     @SerializedName("error") val error: String?
+  )
+
+  data class UserResponse(
+    @SerializedName("name") val name: String,
+    @SerializedName("email") val email: String,
+    @SerializedName("role") val role: String
   )
 }

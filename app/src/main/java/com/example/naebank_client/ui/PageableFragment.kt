@@ -9,7 +9,7 @@ import com.example.naebank_client.R
 import com.example.naebank_client.databinding.FragmentPageableBinding
 import com.google.android.material.navigation.NavigationBarView
 
-class PageableFragment : Fragment() {
+class PageableFragment : BaseFragment() {
   private lateinit var binding: FragmentPageableBinding
   private lateinit var pagerAdapter: PagerAdapter
 

@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import com.example.naebank_client.databinding.FragmentCardsBinding
 import com.example.naebank_client.databinding.FragmentUserBinding
 
-class CardsFragment : Fragment() {
+class CardsFragment : BaseFragment() {
 
   private lateinit var binding: FragmentCardsBinding
 

@@ -8,12 +8,20 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.naebank_client.databinding.FragmentUserBinding
 
-class UserFragment : Fragment() {
+class UserFragment : BaseFragment() {
 
   private lateinit var binding: FragmentUserBinding
 
+
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
     binding = FragmentUserBinding.inflate(inflater, container, false)
+    vm.getUser()
+
+    vm.onCurrentUser.observe(viewLifecycleOwner) {
+      binding.userName.text = it.name
+      binding.userEmail.text = it.email
+      binding.userRole.text = "Your role: ${it.role}"
+    }
 
     return binding.root
   }

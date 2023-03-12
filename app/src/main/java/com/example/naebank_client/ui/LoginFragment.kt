@@ -12,15 +12,13 @@ import com.example.naebank_client.databinding.FragmentLoginBinding
 import com.example.naebank_client.viewmodel.MainViewModel
 import org.koin.android.ext.android.get
 
-class LoginFragment : Fragment() {
+class LoginFragment : BaseFragment() {
 
   private lateinit var binding: FragmentLoginBinding
-  private lateinit var vm: MainViewModel
 
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
     binding = FragmentLoginBinding.inflate(inflater, container, false)
-    vm = (requireActivity() as MainActivity).getVM()
 
     vm.onLoginResult.observe(viewLifecycleOwner) {
       Log.d("denys", "login result: $it")
