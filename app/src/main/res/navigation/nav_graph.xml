@@ -3,17 +3,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    app:startDestination="@id/LoginFragment">
 
   <fragment
-      android:id="@+id/FirstFragment"
+      android:id="@+id/LoginFragment"
       android:name="com.example.naebank_client.ui.LoginFragment"
       android:label="LoginFragment"
       tools:layout="@layout/fragment_login">
 
     <action
-        android:id="@+id/action_LoginFragment_to_UserFragment"
-        app:destination="@id/UserFragment" />
+        android:id="@+id/action_LoginFragment_to_PageableFragment"
+        app:destination="@id/PageableFragment" />
+
+<!--    <action-->
+<!--        android:id="@+id/action_LoginFragment_to_UserFragment"-->
+<!--        app:destination="@id/UserFragment" />-->
 
     <action
         android:id="@+id/action_LoginFragment_to_RegisterFragment"
@@ -21,15 +25,26 @@
   </fragment>
 
   <fragment
-      android:id="@+id/UserFragment"
-      android:name="com.example.naebank_client.ui.UserFragment"
-      android:label="UserFragment"
-      tools:layout="@layout/fragment_user">
+      android:id="@+id/PageableFragment"
+      android:name="com.example.naebank_client.ui.PageableFragment"
+      android:label="PageableFragment"
+      tools:layout="@layout/fragment_pageable">
+
+    <!--    <action-->
+    <!--        android:id="@+id/action_SecondFragment_to_FirstFragment"-->
+    <!--        app:destination="@id/FirstFragment" />-->
+  </fragment>
+
+<!--  <fragment-->
+<!--      android:id="@+id/UserFragment"-->
+<!--      android:name="com.example.naebank_client.ui.UserFragment"-->
+<!--      android:label="UserFragment"-->
+<!--      tools:layout="@layout/fragment_user">-->
 
 <!--    <action-->
 <!--        android:id="@+id/action_SecondFragment_to_FirstFragment"-->
 <!--        app:destination="@id/FirstFragment" />-->
-  </fragment>
+<!--  </fragment>-->
 
   <fragment
       android:id="@+id/RegisterFragment"
@@ -38,7 +53,7 @@
       tools:layout="@layout/fragment_register">
 
     <action
-        android:id="@+id/action_RegisterFragment_to_UserFragment"
-        app:destination="@id/UserFragment" />
+        android:id="@+id/action_RegisterFragment_to_PageableFragment"
+        app:destination="@id/PageableFragment" />
   </fragment>
 </navigation>

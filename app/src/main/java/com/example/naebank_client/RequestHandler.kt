@@ -2,7 +2,7 @@ package com.example.naebank_client
 
 import retrofit2.Response
 
-class SimpleRequestHandler<ResponseType, ResultType : Any>(
+class RequestHandler<ResponseType, ResultType : Any>(
   private val errorParser: ErrorParser,
   private val onRequest: suspend () -> Response<ResponseType>,
   private val onResult: suspend (responseBody: ResponseType) -> Result<ResultType>

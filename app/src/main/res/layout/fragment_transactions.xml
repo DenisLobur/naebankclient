@@ -7,14 +7,14 @@
     tools:context=".ui.UserFragment">
 
   <TextView
-      android:id="@+id/user"
+      android:id="@+id/textview_second"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
-      android:textSize="40sp"
-      android:text="user"/>
+      android:text="trans."
+      android:textSize="40sp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,4 +11,9 @@ interface ApiService {
   suspend fun register(
     @Body request: Data.RegisterRequest
   ): Response<Data.RegisterResponse>
+
+  @POST("auth/login")
+  suspend fun login(
+    @Body request: Data.LoginRequest
+  ): Response<Data.LoginResponse>
 }

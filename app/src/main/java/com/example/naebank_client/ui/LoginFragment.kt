@@ -15,12 +15,21 @@ import org.koin.android.ext.android.get
 class LoginFragment : Fragment() {
 
   private lateinit var binding: FragmentLoginBinding
+  private lateinit var vm: MainViewModel
 
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
     binding = FragmentLoginBinding.inflate(inflater, container, false)
+    vm = (requireActivity() as MainActivity).getVM()
 
+    vm.onLoginResult.observe(viewLifecycleOwner) {
+      Log.d("denys", "login result: $it")
+      findNavController().navigate(R.id.action_LoginFragment_to_PageableFragment)
+    }
 
+    vm.onError.observe(viewLifecycleOwner) {
+      Log.d("denys", "login error: $it")
+    }
 
     return binding.root
   }
@@ -30,7 +39,8 @@ class LoginFragment : Fragment() {
     with(binding) {
 
       loginButton.setOnClickListener {
-        findNavController().navigate(R.id.action_LoginFragment_to_UserFragment)
+        vm.loginUser(email.text.toString(), password.text.toString())
+      //findNavController().navigate(R.id.action_LoginFragment_to_UserFragment)
       }
 
       noAccount.setOnClickListener {

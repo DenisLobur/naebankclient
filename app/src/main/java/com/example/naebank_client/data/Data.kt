@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 object Data {
 
+  // Requests
   data class RegisterRequest(
     @SerializedName("email") val email: String,
     @SerializedName("password") val password: String,
@@ -11,7 +12,19 @@ object Data {
     @SerializedName("role") val role: String
   )
 
+  data class LoginRequest(
+    @SerializedName("email") val email: String,
+    @SerializedName("password") val password: String
+  )
+
+
+  // Response
   data class RegisterResponse(
     @SerializedName("response") val response: String
+  )
+
+  data class LoginResponse(
+    @SerializedName("response") val response: String,
+    @SerializedName("error") val error: String?
   )
 }

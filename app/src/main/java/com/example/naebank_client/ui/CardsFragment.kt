@@ -6,20 +6,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.example.naebank_client.databinding.FragmentCardsBinding
 import com.example.naebank_client.databinding.FragmentUserBinding
 
-class UserFragment : Fragment() {
+class CardsFragment : Fragment() {
 
-  private lateinit var binding: FragmentUserBinding
+  private lateinit var binding: FragmentCardsBinding
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-    binding = FragmentUserBinding.inflate(inflater, container, false)
+    binding = FragmentCardsBinding.inflate(inflater, container, false)
 
     return binding.root
   }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    Log.d("denys", "in user fragment")
+    Log.d("denys", "in cards fragment")
   }
 }
