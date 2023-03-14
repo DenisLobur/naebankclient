@@ -1,16 +1,14 @@
-package com.example.naebank_client.ui
+package com.example.naebank_client.ui.auth
 
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
-import com.example.naebank_client.R
 import com.example.naebank_client.databinding.FragmentLoginBinding
-import com.example.naebank_client.viewmodel.MainViewModel
-import org.koin.android.ext.android.get
+import com.example.naebank_client.ui.BaseFragment
+import com.example.naebank_client.ui.MainActivity
+import com.example.naebank_client.ui.PageableFragment
 
 class LoginFragment : BaseFragment() {
 

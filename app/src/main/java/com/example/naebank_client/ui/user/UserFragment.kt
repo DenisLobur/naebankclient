@@ -1,13 +1,15 @@
-package com.example.naebank_client.ui
+package com.example.naebank_client.ui.user
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.edit
 import com.example.naebank_client.HttpProvider
 import com.example.naebank_client.databinding.FragmentUserBinding
+import com.example.naebank_client.ui.BaseFragment
+import com.example.naebank_client.ui.MainActivity
+import com.example.naebank_client.ui.auth.LoginFragment
 
 class UserFragment : BaseFragment() {
 

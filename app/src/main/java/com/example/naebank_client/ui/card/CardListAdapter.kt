@@ -1,13 +1,12 @@
-package com.example.naebank_client.ui
+package com.example.naebank_client.ui.card
 
 import android.view.LayoutInflater
-import android.view.View.OnClickListener
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.naebank_client.data.Data
 import com.example.naebank_client.databinding.ItemCardBinding
 
-class ListAdapter(val click: OnCardClick) : RecyclerView.Adapter<ListAdapter.Holder>() {
+class CardListAdapter(val click: OnCardClick) : RecyclerView.Adapter<CardListAdapter.Holder>() {
 
   private val data: MutableList<Data.CardResponse> = mutableListOf()
 

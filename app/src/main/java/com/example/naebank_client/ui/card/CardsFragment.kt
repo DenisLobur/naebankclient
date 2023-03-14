@@ -1,11 +1,12 @@
-package com.example.naebank_client.ui
+package com.example.naebank_client.ui.card
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.naebank_client.databinding.FragmentCardsBinding
+import com.example.naebank_client.ui.AddActivity
+import com.example.naebank_client.ui.BaseFragment
 
 class CardsFragment : BaseFragment() {
 
@@ -17,7 +18,7 @@ class CardsFragment : BaseFragment() {
     vm.onCardsResult.observe(viewLifecycleOwner) {
       binding.hasCards = it.isNotEmpty()
 
-      val adapter = ListAdapter(object : ListAdapter.OnCardClick {
+      val adapter = CardListAdapter(object : CardListAdapter.OnCardClick {
         override fun onCardClick(id: Long) {
           val intent = AddActivity.getIntent(requireActivity(), AddActivity.Companion.SCREEN.CARD_DETAILS, cardId = id)
           startActivity(intent)

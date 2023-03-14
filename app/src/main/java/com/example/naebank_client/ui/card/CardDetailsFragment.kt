@@ -1,4 +1,4 @@
-package com.example.naebank_client.ui
+package com.example.naebank_client.ui.card
 
 import android.os.Bundle
 import android.util.Log
@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.os.bundleOf
 import com.example.naebank_client.databinding.FragmentCardDetailsBinding
+import com.example.naebank_client.ui.BaseFragment
 
 class CardDetailsFragment : BaseFragment() {
   private lateinit var binding: FragmentCardDetailsBinding

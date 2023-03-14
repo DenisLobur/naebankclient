@@ -5,6 +5,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import com.example.naebank_client.databinding.ActivityAddBinding
+import com.example.naebank_client.ui.card.AddCardFragment
+import com.example.naebank_client.ui.card.CardDetailsFragment
 
 class AddActivity : BaseActivity() {
 

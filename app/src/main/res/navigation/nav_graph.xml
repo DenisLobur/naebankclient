@@ -7,7 +7,7 @@
 
   <fragment
       android:id="@+id/LoginFragment"
-      android:name="com.example.naebank_client.ui.LoginFragment"
+      android:name="com.example.naebank_client.ui.auth.LoginFragment"
       android:label="LoginFragment"
       tools:layout="@layout/fragment_login">
 
@@ -34,7 +34,7 @@
 
   <fragment
       android:id="@+id/RegisterFragment"
-      android:name="com.example.naebank_client.ui.RegisterFragment"
+      android:name="com.example.naebank_client.ui.auth.RegisterFragment"
       android:label="RegisterFragment"
       tools:layout="@layout/fragment_register">
 

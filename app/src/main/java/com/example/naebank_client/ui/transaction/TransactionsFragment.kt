@@ -1,13 +1,12 @@
-package com.example.naebank_client.ui
+package com.example.naebank_client.ui.transaction
 
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import com.example.naebank_client.databinding.FragmentTransactionsBinding
-import com.example.naebank_client.databinding.FragmentUserBinding
+import com.example.naebank_client.ui.BaseFragment
 
 class TransactionsFragment : BaseFragment() {
 
