@@ -51,4 +51,8 @@ class PageableFragment : BaseFragment() {
       }
     })
   }
+
+  companion object {
+    const val TAG = "PageableFragment"
+  }
 }

@@ -37,6 +37,7 @@ object Data {
   )
 
   data class UserResponse(
+    @SerializedName("id") val id: Long,
     @SerializedName("name") val name: String,
     @SerializedName("email") val email: String,
     @SerializedName("role") val role: String
@@ -48,6 +49,7 @@ object Data {
     @SerializedName("cardMask") val mask: String,
     @SerializedName("expMonth") val expMonth: Int,
     @SerializedName("expYear") val expYear: Int,
-    @SerializedName("isDefault") val isDefault: Boolean
+    @SerializedName("isDefault") val isDefault: Boolean,
+    @SerializedName("amount") val amount: Int
   )
 }

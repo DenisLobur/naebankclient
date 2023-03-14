@@ -1,14 +1,11 @@
 package com.example.naebank_client.ui
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import com.example.naebank_client.databinding.FragmentCardsBinding
-import com.example.naebank_client.databinding.FragmentUserBinding
 
 class CardsFragment : BaseFragment() {
 
@@ -19,7 +16,13 @@ class CardsFragment : BaseFragment() {
 
     vm.onCardsResult.observe(viewLifecycleOwner) {
       binding.hasCards = it.isNotEmpty()
-      val adapter = ListAdapter()
+
+      val adapter = ListAdapter(object : ListAdapter.OnCardClick {
+        override fun onCardClick(id: Long) {
+          val intent = AddActivity.getIntent(requireActivity(), AddActivity.Companion.SCREEN.CARD_DETAILS, cardId = id)
+          startActivity(intent)
+        }
+      })
       adapter.setData(it)
       binding.cardsRv.adapter = adapter
     }
@@ -31,13 +34,14 @@ class CardsFragment : BaseFragment() {
     super.onViewCreated(view, savedInstanceState)
 
     binding.addCardButton.setOnClickListener {
-      val intent = Intent(requireActivity(), AddActivity::class.java)
+      val intent = AddActivity.getIntent(requireActivity(), AddActivity.Companion.SCREEN.ADD_CARD)
       startActivity(intent)
     }
   }
 
   override fun onResume() {
     super.onResume()
-    vm.getCards()
+    val userId = prefs.getLong(USER_ID, 0)
+    vm.getCardsByUserId(userId)
   }
 }

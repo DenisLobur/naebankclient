@@ -62,7 +62,7 @@
       android:layout_marginTop="20dp"
       android:background="@drawable/selector_edittext_login"
       android:hint="Card mask ex.: 1234"
-      android:inputType="textEmailAddress"
+      android:inputType="number"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/card_type" />
@@ -75,7 +75,7 @@
       android:layout_marginTop="20dp"
       android:background="@drawable/selector_edittext_login"
       android:hint="expiration month"
-      android:inputType="textPassword"
+      android:inputType="number"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/card_mask" />
@@ -88,7 +88,7 @@
       android:layout_marginTop="20dp"
       android:background="@drawable/selector_edittext_login"
       android:hint="expiration year"
-      android:inputType="textPassword"
+      android:inputType="number"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/card_exp_month" />

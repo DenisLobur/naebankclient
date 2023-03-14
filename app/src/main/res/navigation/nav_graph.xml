@@ -15,10 +15,6 @@
         android:id="@+id/action_LoginFragment_to_PageableFragment"
         app:destination="@id/PageableFragment" />
 
-<!--    <action-->
-<!--        android:id="@+id/action_LoginFragment_to_UserFragment"-->
-<!--        app:destination="@id/UserFragment" />-->
-
     <action
         android:id="@+id/action_LoginFragment_to_RegisterFragment"
         app:destination="@id/RegisterFragment" />
@@ -30,21 +26,11 @@
       android:label="PageableFragment"
       tools:layout="@layout/fragment_pageable">
 
-    <!--    <action-->
-    <!--        android:id="@+id/action_SecondFragment_to_FirstFragment"-->
-    <!--        app:destination="@id/FirstFragment" />-->
+    <action
+        android:id="@+id/action_PageableFragment_to_LoginFragment"
+        app:destination="@id/LoginFragment"
+        />
   </fragment>
-
-<!--  <fragment-->
-<!--      android:id="@+id/UserFragment"-->
-<!--      android:name="com.example.naebank_client.ui.UserFragment"-->
-<!--      android:label="UserFragment"-->
-<!--      tools:layout="@layout/fragment_user">-->
-
-<!--    <action-->
-<!--        android:id="@+id/action_SecondFragment_to_FirstFragment"-->
-<!--        app:destination="@id/FirstFragment" />-->
-<!--  </fragment>-->
 
   <fragment
       android:id="@+id/RegisterFragment"

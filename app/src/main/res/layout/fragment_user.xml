@@ -31,7 +31,18 @@
       tools:text="email" />
 
   <TextView
-      android:id="@+id/user_role"
+      android:id="@+id/user_role_label"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="10dp"
+      android:textColor="@color/semi_transparent"
+      android:textSize="20sp"
+      app:layout_constraintEnd_toStartOf="@id/user_role_value"
+      app:layout_constraintTop_toTopOf="@id/user_role_value"
+      android:text="Your role:" />
+
+  <TextView
+      android:id="@+id/user_role_value"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginTop="10dp"
@@ -52,5 +63,22 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/user_email"
       tools:ignore="contentDescription" />
+
+  <Button
+      android:id="@+id/logout_button"
+      style="@style/Clickable"
+      android:layout_width="0dp"
+      android:layout_height="45dp"
+      android:layout_gravity="center_horizontal"
+      android:layout_marginHorizontal="80dp"
+      android:layout_marginBottom="20dp"
+      android:background="@drawable/selector_login_btn"
+      android:text="Log Out"
+      android:textAllCaps="false"
+      android:textColor="@color/white"
+      android:textSize="14sp"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

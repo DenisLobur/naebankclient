@@ -1,15 +1,19 @@
 package com.example.naebank_client.ui
 
 import android.view.LayoutInflater
+import android.view.View.OnClickListener
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.naebank_client.data.Data
 import com.example.naebank_client.databinding.ItemCardBinding
 
-class ListAdapter() : RecyclerView.Adapter<ListAdapter.Holder>() {
+class ListAdapter(val click: OnCardClick) : RecyclerView.Adapter<ListAdapter.Holder>() {
 
   private val data: MutableList<Data.CardResponse> = mutableListOf()
 
+  interface OnCardClick {
+    fun onCardClick(id: Long)
+  }
   fun setData(list: List<Data.CardResponse>) {
     if (data.isNotEmpty()) {
       data.clear()
@@ -18,16 +22,20 @@ class ListAdapter() : RecyclerView.Adapter<ListAdapter.Holder>() {
     data.addAll(list)
   }
 
-  class Holder(val binding: ItemCardBinding) : RecyclerView.ViewHolder(binding.root) {
+  class Holder(val binding: ItemCardBinding, val onClickListener: OnCardClick) : RecyclerView.ViewHolder(binding.root) {
     fun bind(card: Data.CardResponse) {
       binding.cardType.text = card.type
       binding.cardMask.text = card.mask
       binding.cardExp.text = "Exp.: ${card.expMonth}/${card.expYear}"
+
+      binding.contentHolder.setOnClickListener {
+        onClickListener.onCardClick(card.id)
+      }
     }
   }
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
-    return Holder(ItemCardBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+    return Holder(ItemCardBinding.inflate(LayoutInflater.from(parent.context), parent, false), click)
   }
 
   override fun getItemCount(): Int = data.size

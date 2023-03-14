@@ -56,11 +56,25 @@ class Repo(val api: ApiService, val errorParser: ErrorParser) {
     ).request()
   }
 
-  suspend fun getCards() = withContext(Dispatchers.IO) {
+  suspend fun getCards(id: Long) = withContext(Dispatchers.IO) {
     RequestHandler(
       errorParser = errorParser,
       onRequest = {
-        api.getCards()
+        api.getCards(userId = id)
+      },
+      onResult = {
+        Success(it)
+      }
+    ).request()
+  }
+
+  suspend fun getCardById(userId: Long, cardId: Long) = withContext(Dispatchers.IO) {
+    RequestHandler(
+      errorParser = errorParser,
+      onRequest = {
+        api.getCardById(
+          id = cardId
+        )
       },
       onResult = {
         Success(it)
@@ -77,6 +91,18 @@ class Repo(val api: ApiService, val errorParser: ErrorParser) {
             type, mask, expMonth, expYear, isDefault
           )
         )
+      },
+      onResult = {
+        Success(it)
+      }
+    ).request()
+  }
+
+  suspend fun deleteCard(id: Long) = withContext(Dispatchers.IO) {
+    RequestHandler(
+      errorParser = errorParser,
+      onRequest = {
+        api.deleteCard(id)
       },
       onResult = {
         Success(it)

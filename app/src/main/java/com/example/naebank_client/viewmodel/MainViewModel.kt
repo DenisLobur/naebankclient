@@ -18,7 +18,9 @@ class MainViewModel(val repo: Repo) : ViewModel() {
   val onLoginResult = MutableLiveData<Data.GeneralResponse?>()
   val onCurrentUser = MutableLiveData<Data.UserResponse>()
   val onCardsResult = MutableLiveData<List<Data.CardResponse>>()
+  val onCardResult = MutableLiveData<Data.CardResponse>()
   val onCardAdded = MutableLiveData<Data.GeneralResponse?>()
+  val onCardDeleted = MutableLiveData<String>()
 
   fun registerUser(name: String, email: String, password: String) {
     isLoading.set(true)
@@ -73,13 +75,30 @@ class MainViewModel(val repo: Repo) : ViewModel() {
     }
   }
 
-  fun getCards() {
+  fun getCardsByUserId(id: Long) {
     isLoading.set(true)
 
     viewModelScope.launch {
-      when (val cards = repo.getCards()) {
+      when (val cards = repo.getCards(id = id)) {
         is Success -> {
           onCardsResult.value = cards.data!!
+        }
+        is Error -> {
+          onError.value = cards.toString()
+        }
+      }
+
+      isLoading.set(false)
+    }
+  }
+
+  fun getCardById(userId: Long, cardId: Long) {
+    isLoading.set(true)
+
+    viewModelScope.launch {
+      when (val cards = repo.getCardById(userId, cardId)) {
+        is Success -> {
+          onCardResult.value = cards.data!!
         }
         is Error -> {
           onError.value = cards.toString()
@@ -100,6 +119,23 @@ class MainViewModel(val repo: Repo) : ViewModel() {
         }
         is Error -> {
           onError.value = card.toString()
+        }
+      }
+
+      isLoading.set(false)
+    }
+  }
+
+  fun deleteCard(id: Long) {
+    isLoading.set(true)
+
+    viewModelScope.launch {
+      when (val deleteCard = repo.deleteCard(id)) {
+        is Success -> {
+          onCardDeleted.value = deleteCard.data!!
+        }
+        is Error -> {
+          onError.value = deleteCard.toString()
         }
       }
 

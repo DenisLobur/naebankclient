@@ -21,8 +21,7 @@ class LoginFragment : BaseFragment() {
     binding = FragmentLoginBinding.inflate(inflater, container, false)
 
     vm.onLoginResult.observe(viewLifecycleOwner) {
-      Log.d("denys", "login result: $it")
-      findNavController().navigate(R.id.action_LoginFragment_to_PageableFragment)
+      (requireActivity() as MainActivity).switchFragment(PageableFragment(), true)
     }
 
     vm.onError.observe(viewLifecycleOwner) {
@@ -38,13 +37,15 @@ class LoginFragment : BaseFragment() {
 
       loginButton.setOnClickListener {
         vm.loginUser(email.text.toString(), password.text.toString())
-      //findNavController().navigate(R.id.action_LoginFragment_to_UserFragment)
       }
 
       noAccount.setOnClickListener {
-        findNavController().navigate(R.id.action_LoginFragment_to_RegisterFragment)
+        (requireActivity() as MainActivity).switchFragment(RegisterFragment(), true)
       }
-
     }
+  }
+
+  companion object {
+    const val TAG = "LoginFragment"
   }
 }

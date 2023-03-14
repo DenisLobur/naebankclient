@@ -20,7 +20,7 @@ class RegisterFragment : BaseFragment() {
 
     vm.onRegisterResult.observe(viewLifecycleOwner) {
       Log.d("denys", "result: $it")
-      findNavController().navigate(R.id.action_RegisterFragment_to_PageableFragment)
+      (requireActivity() as MainActivity).switchFragment(PageableFragment(), true)
     }
 
     vm.onError.observe(viewLifecycleOwner) {
@@ -36,8 +36,11 @@ class RegisterFragment : BaseFragment() {
 
       registerButton.setOnClickListener {
         vm.registerUser(name.text.toString(), email.text.toString(), password.text.toString())
-        //findNavController().navigate(R.id.action_RegisterFragment_to_UserFragment)
       }
     }
+  }
+
+  companion object {
+    const val TAG = "RegisterFragment"
   }
 }

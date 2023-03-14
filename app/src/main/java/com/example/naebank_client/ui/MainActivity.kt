@@ -20,19 +20,22 @@ class MainActivity : BaseActivity() {
       lifecycleOwner = this@MainActivity
       vm = mainVM
     }
-    setContentView(binding.root)
 
-    val navController = findNavController(R.id.nav_host_fragment_content_main)
+    switchFragment(LoginFragment(), false)
+    setContentView(binding.root)
   }
 
+  override fun switchFragment(fragment: BaseFragment, addToBackStack: Boolean) {
+    tag = LoginFragment.TAG // default fragment
+    when(fragment) {
+      is RegisterFragment -> {
+        tag = RegisterFragment.TAG
+      }
+      is PageableFragment -> {
+        tag = PageableFragment.TAG
+      }
+    }
 
-
-//  fun topUpFragment(fragment: BaseFragment, addToBackStack: Boolean) {
-//    val ft = supportFragmentManager.beginTransaction()
-//    ft.add(R.id.content, fragment, tag)
-//    if (addToBackStack) {
-//      ft.addToBackStack(null)
-//    }
-//    ft.commitAllowingStateLoss()
-//  }
+    super.switchFragment(fragment, addToBackStack)
+  }
 }
