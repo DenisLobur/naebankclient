@@ -19,7 +19,7 @@ abstract class BaseActivity : AppCompatActivity(), LifecycleOwner {
     val ft = supportFragmentManager.beginTransaction()
     ft.replace(R.id.content, fragment, tag)
     if (addToBackStack) {
-      ft.addToBackStack(null)
+      ft.addToBackStack(tag)
     }
     ft.commitAllowingStateLoss()
   }

@@ -21,7 +21,7 @@ class MainActivity : BaseActivity() {
       vm = mainVM
     }
 
-    switchFragment(LoginFragment(), false)
+    switchFragment(LoginFragment(), true)
     setContentView(binding.root)
   }
 

@@ -1,6 +1,7 @@
 package com.example.naebank_client.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,7 +35,8 @@ class UserFragment : BaseFragment() {
 
     binding.logoutButton.setOnClickListener {
       HttpProvider.authHeader = ""
-      (requireActivity() as MainActivity).switchFragment(LoginFragment(), false)
+
+      (requireActivity() as MainActivity).switchFragment(LoginFragment(), true)
     }
   }
 }
