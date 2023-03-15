@@ -5,7 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.edit
+import androidx.navigation.fragment.findNavController
 import com.example.naebank_client.HttpProvider
+import com.example.naebank_client.R
 import com.example.naebank_client.databinding.FragmentUserBinding
 import com.example.naebank_client.ui.BaseFragment
 import com.example.naebank_client.ui.MainActivity
@@ -38,7 +40,8 @@ class UserFragment : BaseFragment() {
     binding.logoutButton.setOnClickListener {
       HttpProvider.authHeader = ""
 
-      (requireActivity() as MainActivity).switchFragment(LoginFragment(), true)
+      //(requireActivity() as MainActivity).switchFragment(LoginFragment(), true)
+      findNavController().navigate(R.id.action_pageable_to_login)
     }
   }
 }

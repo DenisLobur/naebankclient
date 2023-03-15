@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.os.bundleOf
+import androidx.navigation.fragment.findNavController
+import com.example.naebank_client.R
 import com.example.naebank_client.databinding.FragmentCardDetailsBinding
 import com.example.naebank_client.ui.AddActivity
 import com.example.naebank_client.ui.BaseFragment
@@ -56,14 +58,20 @@ class CardDetailsFragment : BaseFragment() {
     }
 
     binding.cardWithdrawBtn.setOnClickListener {
-      (requireActivity() as AddActivity).switchFragment(
-        CardOperationsFragment.getInstance(cardId!!, CardOperationsFragment.Companion.OPERATION.WITHDRAW, balance), true
+//      (requireActivity() as AddActivity).switchFragment(
+//        CardOperationsFragment.getInstance(cardId!!, CardOperationsFragment.Companion.OPERATION.WITHDRAW, balance), true
+//      )
+
+      findNavController().navigate(
+//        CardDetailsFragmentDirections
+        CardDetailsFragmentDirections.navActionDetailsToOperations(cardId!!, CardOperationsFragment.Companion.OPERATION.WITHDRAW.ordinal, balance)
+//        R.id.nav_action_details_to_operations
       )
     }
 
     binding.cardTopupBtn.setOnClickListener {
       (requireActivity() as AddActivity).switchFragment(
-        CardOperationsFragment.getInstance(cardId!!, CardOperationsFragment.Companion.OPERATION.TOPUP, balance), true
+        CardOperationsFragment.getInstance(cardId!!, CardOperationsFragment.Companion.OPERATION.TOPUP.ordinal, balance), true
       )
     }
 

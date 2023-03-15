@@ -45,11 +45,11 @@ class PageableFragment : BaseFragment() {
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
-    requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
-      override fun handleOnBackPressed() {
-        requireActivity().finish()
-      }
-    })
+//    requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+//      override fun handleOnBackPressed() {
+//        requireActivity().finish()
+//      }
+//    })
   }
 
   companion object {

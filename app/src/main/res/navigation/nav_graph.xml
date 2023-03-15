@@ -3,43 +3,59 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/LoginFragment">
+    app:startDestination="@id/login">
 
   <fragment
-      android:id="@+id/LoginFragment"
+      android:id="@+id/login"
       android:name="com.example.naebank_client.ui.auth.LoginFragment"
-      android:label="LoginFragment"
+      android:label="login"
       tools:layout="@layout/fragment_login">
 
     <action
-        android:id="@+id/action_LoginFragment_to_PageableFragment"
-        app:destination="@id/PageableFragment" />
+        android:id="@+id/action_login_to_pageable"
+        app:destination="@id/pageable" />
 
     <action
-        android:id="@+id/action_LoginFragment_to_RegisterFragment"
-        app:destination="@id/RegisterFragment" />
+        android:id="@+id/action_login_to_register"
+        app:destination="@id/register" />
   </fragment>
 
   <fragment
-      android:id="@+id/PageableFragment"
+      android:id="@+id/pageable"
       android:name="com.example.naebank_client.ui.PageableFragment"
-      android:label="PageableFragment"
+      android:label="pageable"
       tools:layout="@layout/fragment_pageable">
 
     <action
-        android:id="@+id/action_PageableFragment_to_LoginFragment"
-        app:destination="@id/LoginFragment"
-        />
+        android:id="@+id/action_pageable_to_login"
+        app:destination="@+id/login"
+        app:popUpTo="@+id/login"/>
   </fragment>
 
   <fragment
-      android:id="@+id/RegisterFragment"
+      android:id="@+id/register"
       android:name="com.example.naebank_client.ui.auth.RegisterFragment"
-      android:label="RegisterFragment"
+      android:label="register"
       tools:layout="@layout/fragment_register">
 
     <action
-        android:id="@+id/action_RegisterFragment_to_PageableFragment"
-        app:destination="@id/PageableFragment" />
+        android:id="@+id/action_register_to_pageable"
+        app:destination="@id/pageable" />
   </fragment>
+
+  <fragment
+      android:id="@+id/user_fragment"
+      android:name="com.example.naebank_client.ui.user.UserFragment"
+      android:label="user_fragment"
+      tools:layout="@layout/fragment_user">
+
+    <action
+        android:id="@+id/action_user_to_login"
+        app:destination="@+id/login"
+        app:popUpTo="@id/login"/>
+  </fragment>
+
+  <include app:graph="@navigation/card_graph" />
+<!--  <include app:graph="@navigation/pageable_graph"/>-->
+
 </navigation>

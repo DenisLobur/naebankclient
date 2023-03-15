@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.core.widget.doAfterTextChanged
+import androidx.navigation.Navigation
 import com.example.naebank_client.databinding.FragmentCardOperationsBinding
 import com.example.naebank_client.ui.AddActivity
 import com.example.naebank_client.ui.BaseFragment
@@ -48,7 +49,8 @@ class CardOperationsFragment : BaseFragment() {
     super.onViewCreated(view, savedInstanceState)
 
     binding.close.setOnClickListener {
-      (requireActivity() as AddActivity).supportFragmentManager.popBackStack()
+      //(requireActivity() as AddActivity).supportFragmentManager.popBackStack()
+      Navigation.findNavController(view).navigateUp()
     }
 
     binding.doIt.setOnClickListener {
@@ -81,11 +83,11 @@ class CardOperationsFragment : BaseFragment() {
       TOPUP, WITHDRAW
     }
 
-    fun getInstance(cardId: Long, operation: OPERATION, balance: Int): CardOperationsFragment {
+    fun getInstance(cardId: Long, operation: Int, balance: Int): CardOperationsFragment {
       val fragment = CardOperationsFragment()
       fragment.arguments = bundleOf(
         CARD_ID to cardId,
-        OP to operation.ordinal,
+        OP to operation,
         BALANCE to balance
       )
 

@@ -5,6 +5,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
+import com.example.naebank_client.R
 import com.example.naebank_client.databinding.FragmentLoginBinding
 import com.example.naebank_client.ui.BaseFragment
 import com.example.naebank_client.ui.MainActivity
@@ -18,7 +20,8 @@ class LoginFragment : BaseFragment() {
     binding = FragmentLoginBinding.inflate(inflater, container, false)
 
     vm.onLoginResult.observe(viewLifecycleOwner) {
-      (requireActivity() as MainActivity).switchFragment(PageableFragment(), true)
+      //(requireActivity() as MainActivity).switchFragment(PageableFragment(), true)
+      findNavController().navigate(R.id.action_login_to_pageable)
     }
 
     vm.onError.observe(viewLifecycleOwner) {
@@ -37,7 +40,8 @@ class LoginFragment : BaseFragment() {
       }
 
       noAccount.setOnClickListener {
-        (requireActivity() as MainActivity).switchFragment(RegisterFragment(), true)
+        //(requireActivity() as MainActivity).switchFragment(RegisterFragment(), true)
+        findNavController().navigate(R.id.action_login_to_register)
       }
     }
   }

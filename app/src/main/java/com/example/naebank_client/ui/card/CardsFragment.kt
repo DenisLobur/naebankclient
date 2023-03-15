@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
+import com.example.naebank_client.R
 import com.example.naebank_client.databinding.FragmentCardsBinding
 import com.example.naebank_client.ui.AddActivity
 import com.example.naebank_client.ui.BaseFragment
@@ -20,8 +22,13 @@ class CardsFragment : BaseFragment() {
 
       val adapter = CardListAdapter(object : CardListAdapter.OnCardClick {
         override fun onCardClick(id: Long) {
-          val intent = AddActivity.getIntent(requireActivity(), AddActivity.Companion.SCREEN.CARD_DETAILS, cardId = id)
-          startActivity(intent)
+//          val intent = AddActivity.getIntent(requireActivity(), AddActivity.Companion.SCREEN.CARD_DETAILS, cardId = id)
+//          startActivity(intent)
+//          findNavController().navigate(R.id.na)
+
+          findNavController().navigate(
+            CardsFragmentDirections.actionCardsToCardDetails(id)
+          )
         }
       })
       adapter.setData(it)
@@ -35,8 +42,10 @@ class CardsFragment : BaseFragment() {
     super.onViewCreated(view, savedInstanceState)
 
     binding.addCardButton.setOnClickListener {
-      val intent = AddActivity.getIntent(requireActivity(), AddActivity.Companion.SCREEN.ADD_CARD)
-      startActivity(intent)
+//      val intent = AddActivity.getIntent(requireActivity(), AddActivity.Companion.SCREEN.ADD_CARD)
+//      startActivity(intent)
+      findNavController().navigate(R.id.action_cards_to_add_card)
+      //val navController = requireActivity().supportFragmentManager.getNav
     }
   }
 

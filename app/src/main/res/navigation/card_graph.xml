@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card_graph"
+    app:startDestination="@id/cards_fragment">
+
+  <fragment
+      android:id="@+id/cards_fragment"
+      android:name="com.example.naebank_client.ui.card.CardsFragment"
+      android:label="cards_fragment"
+      tools:layout="@layout/fragment_cards">
+
+    <action
+        android:id="@+id/action_cards_to_card_details"
+        app:destination="@id/card_details">
+      <argument
+          android:name="id"
+          app:argType="long" />
+    </action>
+
+    <action
+        android:id="@+id/action_cards_to_add_card"
+        app:destination="@id/add_card" />
+  </fragment>
+
+  <fragment
+      android:id="@+id/add_card"
+      android:name="com.example.naebank_client.ui.card.AddCardFragment"
+      android:label="add_card"
+      tools:layout="@layout/fragment_add_card"/>
+
+  <fragment
+      android:id="@+id/card_details"
+      android:name="com.example.naebank_client.ui.card.CardDetailsFragment"
+      android:label="card_details"
+      tools:layout="@layout/fragment_card_details">
+
+    <action
+        android:id="@+id/nav_action_details_to_operations"
+        app:destination="@+id/card_operations">
+
+      <argument
+          android:name="id"
+          app:argType="long" />
+
+      <argument
+          android:name="operation"
+          app:argType="integer" />
+
+      <argument
+          android:name="balance"
+          app:argType="integer" />
+    </action>
+  </fragment>
+
+  <fragment
+      android:id="@+id/card_operations"
+      android:name="com.example.naebank_client.ui.card.CardOperationsFragment"
+      android:label="card_operations"
+      tools:layout="@layout/fragment_card_operations" />
+</navigation>

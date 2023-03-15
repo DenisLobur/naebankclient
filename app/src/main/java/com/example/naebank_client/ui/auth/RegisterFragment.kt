@@ -5,6 +5,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
+import com.example.naebank_client.R
 import com.example.naebank_client.databinding.FragmentRegisterBinding
 import com.example.naebank_client.ui.BaseFragment
 import com.example.naebank_client.ui.MainActivity
@@ -18,8 +20,8 @@ class RegisterFragment : BaseFragment() {
     binding = FragmentRegisterBinding.inflate(inflater, container, false)
 
     vm.onRegisterResult.observe(viewLifecycleOwner) {
-      Log.d("denys", "result: $it")
-      (requireActivity() as MainActivity).switchFragment(PageableFragment(), true)
+//      (requireActivity() as MainActivity).switchFragment(PageableFragment(), true)
+      findNavController().navigate(R.id.action_register_to_pageable)
     }
 
     vm.onError.observe(viewLifecycleOwner) {
