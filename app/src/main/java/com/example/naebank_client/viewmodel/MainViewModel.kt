@@ -22,7 +22,7 @@ class MainViewModel(val repo: Repo) : ViewModel() {
   val onCardResult = MutableLiveData<Data.CardResponse>()
   val onCardAdded = MutableLiveData<Data.GeneralResponse?>()
   val onCardUpdated = MutableLiveData<Data.CardResponse>()
-  val onCardDeleted = MutableLiveData<String>()
+  val onCardDeleted = MutableLiveData<Data.GeneralResponse>()
 
   fun registerUser(name: String, email: String, password: String) {
     isLoading.set(true)

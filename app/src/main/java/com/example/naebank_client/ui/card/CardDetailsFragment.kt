@@ -37,6 +37,10 @@ class CardDetailsFragment : BaseFragment() {
       requireActivity().finish()
     }
 
+    vm.onError.observe(viewLifecycleOwner) {
+      Log.d("denys", it)
+    }
+
     return binding.root
   }
 
@@ -46,10 +50,9 @@ class CardDetailsFragment : BaseFragment() {
     userId = prefs.getLong(USER_ID, 0)
 
     binding.cardDeleteBtn.setOnClickListener {
-      Log.d("denys", "cardId $id")
-//      vm.deleteCard(
-//        id = id!!
-//      )
+      vm.deleteCard(
+        id = cardId!!
+      )
     }
 
     binding.cardWithdrawBtn.setOnClickListener {
@@ -71,7 +74,6 @@ class CardDetailsFragment : BaseFragment() {
 
   override fun onResume() {
     super.onResume()
-    Log.d("denys", "userId: $userId, cardId: $cardId")
     vm.getCardById(userId ?: 0, cardId ?: 0)
   }
 

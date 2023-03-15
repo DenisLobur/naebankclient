@@ -42,5 +42,5 @@ interface ApiService {
   @DELETE("cards/{id}")
   suspend fun deleteCard(
     @Path("id") id: Long
-  ): Response<String>
+  ): Response<Data.GeneralResponse>
 }
