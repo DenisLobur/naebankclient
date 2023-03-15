@@ -6,6 +6,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import com.example.naebank_client.Result.*
 import com.example.naebank_client.data.Data
+import com.example.naebank_client.ui.card.CardOperationsFragment
 
 class Repo(val api: ApiService, val errorParser: ErrorParser) {
   suspend fun registerUser(name: String, email: String, password: String) = withContext(Dispatchers.IO) {
@@ -91,6 +92,21 @@ class Repo(val api: ApiService, val errorParser: ErrorParser) {
             type, mask, expMonth, expYear, isDefault
           )
         )
+      },
+      onResult = {
+        Success(it)
+      }
+    ).request()
+  }
+
+  suspend fun updateCardBalance(id: Long, amount: Int, operation: CardOperationsFragment.Companion.OPERATION) = withContext(Dispatchers.IO) {
+    RequestHandler(
+      errorParser = errorParser,
+      onRequest = {
+        when (operation) {
+          CardOperationsFragment.Companion.OPERATION.WITHDRAW -> api.updateCard(Data.CardAmountRequest(id, -amount))
+          CardOperationsFragment.Companion.OPERATION.TOPUP -> api.updateCard(Data.CardAmountRequest(id, amount))
+        }
       },
       onResult = {
         Success(it)

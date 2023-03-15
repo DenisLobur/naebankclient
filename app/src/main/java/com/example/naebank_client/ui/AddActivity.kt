@@ -25,8 +25,8 @@ class AddActivity : BaseActivity() {
     Log.d("denys", "cardId: $cardId")
 
     when (screen) {
-      SCREEN.ADD_CARD -> topUpFragment(AddCardFragment(), true)
-      SCREEN.CARD_DETAILS -> topUpFragment(CardDetailsFragment.getInstance(cardId), true)
+      SCREEN.ADD_CARD -> switchFragment(AddCardFragment(), true)
+      SCREEN.CARD_DETAILS -> switchFragment(CardDetailsFragment.getInstance(cardId), true)
     }
 
     setContentView(binding.root)

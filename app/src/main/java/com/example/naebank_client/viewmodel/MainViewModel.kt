@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.naebank_client.HttpProvider
 import com.example.naebank_client.data.Data
 import com.example.naebank_client.data.repository.Repo
+import com.example.naebank_client.ui.card.CardOperationsFragment
 import kotlinx.coroutines.launch
 
 class MainViewModel(val repo: Repo) : ViewModel() {
@@ -20,6 +21,7 @@ class MainViewModel(val repo: Repo) : ViewModel() {
   val onCardsResult = MutableLiveData<List<Data.CardResponse>>()
   val onCardResult = MutableLiveData<Data.CardResponse>()
   val onCardAdded = MutableLiveData<Data.GeneralResponse?>()
+  val onCardUpdated = MutableLiveData<Data.CardResponse>()
   val onCardDeleted = MutableLiveData<String>()
 
   fun registerUser(name: String, email: String, password: String) {
@@ -119,6 +121,23 @@ class MainViewModel(val repo: Repo) : ViewModel() {
         }
         is Error -> {
           onError.value = card.toString()
+        }
+      }
+
+      isLoading.set(false)
+    }
+  }
+
+  fun updateCardBalance(id: Long, amount: Int, operation: CardOperationsFragment.Companion.OPERATION) {
+    isLoading.set(true)
+
+    viewModelScope.launch {
+      when (val updateCard = repo.updateCardBalance(id, amount, operation)) {
+        is Success -> {
+          onCardUpdated.value = updateCard.data!!
+        }
+        is Error -> {
+          onError.value = updateCard.toString()
         }
       }
 

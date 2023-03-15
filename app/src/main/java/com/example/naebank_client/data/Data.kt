@@ -25,6 +25,11 @@ object Data {
     @SerializedName("isDefault") val isDefault: Boolean
   )
 
+  data class CardAmountRequest(
+    @SerializedName("id") val id: Long,
+    @SerializedName("amount") val amount: Int
+  )
+
   // Response
   data class RegisterResponse(
     @SerializedName("response") val response: String,

@@ -34,6 +34,11 @@ interface ApiService {
     @Body request: Data.CardRequest
   ): Response<Data.GeneralResponse>
 
+  @PATCH("cards")
+  suspend fun updateCard(
+    @Body request: Data.CardAmountRequest
+  ): Response<Data.CardResponse>
+
   @DELETE("cards/{id}")
   suspend fun deleteCard(
     @Path("id") id: Long
