@@ -17,7 +17,7 @@ class PageableFragment : BaseFragment() {
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
     binding = FragmentPageableBinding.inflate(inflater, container, false)
     binding.bottomNavigation.setOnItemSelectedListener(navListener)
-    pagerAdapter = PagerAdapter(this)
+    //pagerAdapter = PagerAdapter(this)
     binding.pager.adapter = pagerAdapter
 
     return binding.root

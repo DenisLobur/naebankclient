@@ -4,11 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.core.content.edit
 import com.example.naebank_client.HttpProvider
 import com.example.naebank_client.databinding.FragmentUserBinding
 import com.example.naebank_client.ui.BaseFragment
-import com.example.naebank_client.ui.MainActivity
+import com.example.naebank_client.ui.auth.AuthActivity
 import com.example.naebank_client.ui.auth.LoginFragment
 
 class UserFragment : BaseFragment() {
@@ -37,8 +38,14 @@ class UserFragment : BaseFragment() {
 
     binding.logoutButton.setOnClickListener {
       HttpProvider.authHeader = ""
-
-      (requireActivity() as MainActivity).switchFragment(LoginFragment(), true)
+      startActivity(AuthActivity.getIntent(requireActivity()))
+      requireActivity().finish()
     }
+
+    requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+      override fun handleOnBackPressed() {
+        requireActivity().finish()
+      }
+    })
   }
 }

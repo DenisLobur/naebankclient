@@ -7,8 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.naebank_client.databinding.FragmentRegisterBinding
 import com.example.naebank_client.ui.BaseFragment
-import com.example.naebank_client.ui.MainActivity
 import com.example.naebank_client.ui.PageableFragment
+import com.example.naebank_client.ui.PagerActivity
 
 class RegisterFragment : BaseFragment() {
 
@@ -18,8 +18,8 @@ class RegisterFragment : BaseFragment() {
     binding = FragmentRegisterBinding.inflate(inflater, container, false)
 
     vm.onRegisterResult.observe(viewLifecycleOwner) {
-      Log.d("denys", "result: $it")
-      (requireActivity() as MainActivity).switchFragment(PageableFragment(), true)
+      PagerActivity.getIntent(requireActivity())
+      requireActivity().finish()
     }
 
     vm.onError.observe(viewLifecycleOwner) {

@@ -5,10 +5,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import com.example.naebank_client.databinding.FragmentLoginBinding
 import com.example.naebank_client.ui.BaseFragment
-import com.example.naebank_client.ui.MainActivity
 import com.example.naebank_client.ui.PageableFragment
+import com.example.naebank_client.ui.PagerActivity
 
 class LoginFragment : BaseFragment() {
 
@@ -18,7 +19,8 @@ class LoginFragment : BaseFragment() {
     binding = FragmentLoginBinding.inflate(inflater, container, false)
 
     vm.onLoginResult.observe(viewLifecycleOwner) {
-      (requireActivity() as MainActivity).switchFragment(PageableFragment(), true)
+      startActivity(PagerActivity.getIntent(requireActivity()))
+      requireActivity().finish()
     }
 
     vm.onError.observe(viewLifecycleOwner) {
@@ -37,9 +39,15 @@ class LoginFragment : BaseFragment() {
       }
 
       noAccount.setOnClickListener {
-        (requireActivity() as MainActivity).switchFragment(RegisterFragment(), true)
+        (requireActivity() as AuthActivity).switchFragment(RegisterFragment(), true)
       }
     }
+
+    requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+      override fun handleOnBackPressed() {
+        requireActivity().finish()
+      }
+    })
   }
 
   companion object {

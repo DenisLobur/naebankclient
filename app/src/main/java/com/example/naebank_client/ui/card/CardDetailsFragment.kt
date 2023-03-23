@@ -56,13 +56,13 @@ class CardDetailsFragment : BaseFragment() {
     }
 
     binding.cardWithdrawBtn.setOnClickListener {
-      (requireActivity() as AddActivity).switchFragment(
+      (requireActivity() as AddActivity).topUpFragment(
         CardOperationsFragment.getInstance(cardId!!, CardOperationsFragment.Companion.OPERATION.WITHDRAW, balance), true
       )
     }
 
     binding.cardTopupBtn.setOnClickListener {
-      (requireActivity() as AddActivity).switchFragment(
+      (requireActivity() as AddActivity).topUpFragment(
         CardOperationsFragment.getInstance(cardId!!, CardOperationsFragment.Companion.OPERATION.TOPUP, balance), true
       )
     }

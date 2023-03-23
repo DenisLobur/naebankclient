@@ -16,7 +16,7 @@
       android:theme="@style/Theme.Naebankclient"
       tools:targetApi="31">
     <activity
-        android:name=".ui.MainActivity"
+        android:name=".ui.auth.AuthActivity"
         android:exported="true"
         android:theme="@style/Theme.Naebankclient.NoActionBar">
       <intent-filter>
@@ -28,6 +28,11 @@
 
     <activity
         android:name=".ui.AddActivity"
+        android:exported="true"
+        android:theme="@style/Theme.Naebankclient.NoActionBar" />
+
+    <activity
+        android:name=".ui.PagerActivity"
         android:exported="true"
         android:theme="@style/Theme.Naebankclient.NoActionBar" />
   </application>
