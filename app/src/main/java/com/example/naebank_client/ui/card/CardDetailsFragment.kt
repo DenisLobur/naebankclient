@@ -16,6 +16,7 @@ class CardDetailsFragment : BaseFragment() {
   private var cardId: Long? = null
   private var userId: Long? = null
   private var balance: Int = 0
+  private var cardName: String? = null
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
     binding = FragmentCardDetailsBinding.inflate(inflater, container, false)
@@ -30,6 +31,8 @@ class CardDetailsFragment : BaseFragment() {
       binding.cardExpYearValue.text = card.expYear.toString()
       binding.cardBalanceValue.text = card.amount.toString() + " UAH"
       balance = card.amount
+
+      cardName = card.type + " " + card.mask
     }
 
     vm.onCardDeleted.observe(viewLifecycleOwner) {
@@ -57,13 +60,21 @@ class CardDetailsFragment : BaseFragment() {
 
     binding.cardWithdrawBtn.setOnClickListener {
       (requireActivity() as AddActivity).topUpFragment(
-        CardOperationsFragment.getInstance(cardId!!, CardOperationsFragment.Companion.OPERATION.WITHDRAW, balance), true
+        CardOperationsFragment.getInstance(
+          cardId = cardId!!,
+          cardName = cardName!!,
+          operation = CardOperationsFragment.Companion.OPERATION.WITHDRAW, balance
+        ), true
       )
     }
 
     binding.cardTopupBtn.setOnClickListener {
       (requireActivity() as AddActivity).topUpFragment(
-        CardOperationsFragment.getInstance(cardId!!, CardOperationsFragment.Companion.OPERATION.TOPUP, balance), true
+        CardOperationsFragment.getInstance(
+          cardId = cardId!!,
+          cardName = cardName!!,
+          operation = CardOperationsFragment.Companion.OPERATION.TOPUP, balance
+        ), true
       )
     }
 

@@ -1,11 +1,12 @@
 package com.example.naebank_client.viewmodel
 
-import com.example.naebank_client.Result.*
 import androidx.databinding.ObservableBoolean
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.naebank_client.HttpProvider
+import com.example.naebank_client.Result.Error
+import com.example.naebank_client.Result.Success
 import com.example.naebank_client.data.Data
 import com.example.naebank_client.data.repository.Repo
 import com.example.naebank_client.ui.card.CardOperationsFragment
@@ -23,6 +24,7 @@ class MainViewModel(val repo: Repo) : ViewModel() {
   val onCardAdded = MutableLiveData<Data.GeneralResponse?>()
   val onCardUpdated = MutableLiveData<Data.CardResponse>()
   val onCardDeleted = MutableLiveData<Data.GeneralResponse>()
+  val onTransactionAdded = MutableLiveData<Data.GeneralResponse?>()
 
   fun registerUser(name: String, email: String, password: String) {
     isLoading.set(true)
@@ -118,6 +120,23 @@ class MainViewModel(val repo: Repo) : ViewModel() {
       when (val card = repo.addCard(type, mask, expMonth, expYear, isDefault)) {
         is Success -> {
           onCardAdded.value = card.data
+        }
+        is Error -> {
+          onError.value = card.toString()
+        }
+      }
+
+      isLoading.set(false)
+    }
+  }
+
+  fun addTransaction(cardId: Long, amount: Int, type: String, cardName: String, status: String) {
+    isLoading.set(true)
+
+    viewModelScope.launch {
+      when (val card = repo.addTransaction(cardId, amount, type, cardName, status)) {
+        is Success -> {
+          onTransactionAdded.value = card.data
         }
         is Error -> {
           onError.value = card.toString()

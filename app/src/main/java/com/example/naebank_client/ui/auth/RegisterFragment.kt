@@ -18,7 +18,7 @@ class RegisterFragment : BaseFragment() {
     binding = FragmentRegisterBinding.inflate(inflater, container, false)
 
     vm.onRegisterResult.observe(viewLifecycleOwner) {
-      PagerActivity.getIntent(requireActivity())
+      startActivity(PagerActivity.getIntent(requireActivity()))
       requireActivity().finish()
     }
 

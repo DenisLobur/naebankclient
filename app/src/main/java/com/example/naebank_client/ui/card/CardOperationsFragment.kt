@@ -17,6 +17,7 @@ class CardOperationsFragment : BaseFragment() {
   private var operation: OPERATION = OPERATION.WITHDRAW
   private var cardId: Long = 0L
   private var balance: Int = 0
+  private var cardName: String = ""
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
     binding = FragmentCardOperationsBinding.inflate(inflater, container, false)
@@ -24,6 +25,7 @@ class CardOperationsFragment : BaseFragment() {
     cardId = arguments?.getLong(CARD_ID) ?: 0L
     balance = arguments?.getInt(BALANCE) ?: 0
     operation = OPERATION.values()[arguments?.getInt(OP, OPERATION.WITHDRAW.ordinal)!!]
+    cardName = arguments?.getString(CARD_NAME) ?: ""
 
     binding.balanceValue.text = balance.toString() + " UAH"
     when (operation) {
@@ -38,6 +40,14 @@ class CardOperationsFragment : BaseFragment() {
     }
 
     vm.onCardUpdated.observe(viewLifecycleOwner) {
+      vm.addTransaction(
+        cardId = cardId,
+        amount = binding.amount.text.toString().toInt(),
+        type = operation.name,
+        cardName = cardName,
+        status = "success"
+      )
+
       Toast.makeText(requireActivity(), "SUCCESS", Toast.LENGTH_SHORT).show()
       (requireActivity() as AddActivity).supportFragmentManager.popBackStack()
     }
@@ -76,17 +86,19 @@ class CardOperationsFragment : BaseFragment() {
     const val OP = "operation"
     const val CARD_ID = "card_id"
     const val BALANCE = "balance"
+    const val CARD_NAME = "card_name"
 
     enum class OPERATION {
       TOPUP, WITHDRAW
     }
 
-    fun getInstance(cardId: Long, operation: OPERATION, balance: Int): CardOperationsFragment {
+    fun getInstance(cardId: Long, cardName: String, operation: OPERATION, balance: Int): CardOperationsFragment {
       val fragment = CardOperationsFragment()
       fragment.arguments = bundleOf(
         CARD_ID to cardId,
         OP to operation.ordinal,
-        BALANCE to balance
+        BALANCE to balance,
+        CARD_NAME to cardName
       )
 
       return fragment

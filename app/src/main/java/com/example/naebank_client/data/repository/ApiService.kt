@@ -43,4 +43,10 @@ interface ApiService {
   suspend fun deleteCard(
     @Path("id") id: Long
   ): Response<Data.GeneralResponse>
+
+  @POST("transactions/{cardId}")
+  suspend fun addTransaction(
+    @Path("cardId") cardId: Long,
+    @Body request: Data.TransactionRequest
+  ): Response<Data.GeneralResponse>
 }

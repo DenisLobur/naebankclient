@@ -126,4 +126,21 @@ class Repo(val api: ApiService, val errorParser: ErrorParser) {
     ).request()
   }
 
+  suspend fun addTransaction(cardId: Long, amount: Int, type: String, cardName: String, status: String) = withContext(Dispatchers.IO) {
+    RequestHandler(
+      errorParser = errorParser,
+      onRequest = {
+        api.addTransaction(
+          cardId,
+          Data.TransactionRequest(
+            amount, type, cardName, status
+          )
+        )
+      },
+      onResult = {
+        Success(it)
+      }
+    ).request()
+  }
+
 }
