@@ -6,6 +6,9 @@ import android.view.View
 import android.widget.EditText
 import androidx.databinding.BindingAdapter
 import androidx.databinding.BindingConversion
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 
 @set:BindingAdapter("visibleOrGone")
 inline var View.visibleOrGone
@@ -48,6 +51,15 @@ fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
 
     override fun afterTextChanged(editable: Editable?) {
       afterTextChanged.invoke(editable.toString())
+    }
+  })
+}
+
+fun <T> LiveData<T>.observeOnce(lifecycleOwner: LifecycleOwner, observer: Observer<T>) {
+  observe(lifecycleOwner, object : Observer<T> {
+    override fun onChanged(value: T) {
+      observer.onChanged(value)
+      removeObserver(this)
     }
   })
 }

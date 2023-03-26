@@ -11,6 +11,7 @@ import com.example.naebank_client.data.Data
 import com.example.naebank_client.data.repository.Repo
 import com.example.naebank_client.ui.card.CardOperationsFragment
 import kotlinx.coroutines.launch
+import java.util.Optional
 
 class MainViewModel(val repo: Repo) : ViewModel() {
 
@@ -22,7 +23,7 @@ class MainViewModel(val repo: Repo) : ViewModel() {
   val onCardsResult = MutableLiveData<List<Data.CardResponse>>()
   val onCardResult = MutableLiveData<Data.CardResponse>()
   val onCardAdded = MutableLiveData<Data.GeneralResponse?>()
-  val onCardUpdated = MutableLiveData<Data.CardResponse>()
+  val onCardUpdated = SingleLiveEvent<Data.CardResponse>()
   val onCardDeleted = MutableLiveData<Data.GeneralResponse>()
   val onTransactionsResult = MutableLiveData<List<Data.TransactionResponse>>()
   val onTransactionAdded = MutableLiveData<Data.GeneralResponse?>()
@@ -183,11 +184,11 @@ class MainViewModel(val repo: Repo) : ViewModel() {
     }
   }
 
-  fun getTransactionsByUserId(id: Long) {
+  fun getTransactionsByUserId(id: Long, cardId: Long? = null) {
     isLoading.set(true)
 
     viewModelScope.launch {
-      when (val trans = repo.getTransactionsByUserId(id = id)) {
+      when (val trans = repo.getTransactionsByUserId(id = id, cardId = cardId)) {
         is Success -> {
           onTransactionsResult.value = trans.data!!
         }

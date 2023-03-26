@@ -3,6 +3,7 @@ package com.example.naebank_client.data.repository
 import com.example.naebank_client.data.Data
 import retrofit2.Response
 import retrofit2.http.*
+import java.util.Optional
 
 interface ApiService {
 
@@ -52,6 +53,7 @@ interface ApiService {
 
   @GET("transactions")
   suspend fun getTransactionsByUserId(
-    @Query("user_id") userId: Long
+    @Query("user_id") userId: Long,
+    @Query("card_id") cardId: Long?
   ): Response<List<Data.TransactionResponse>>
 }

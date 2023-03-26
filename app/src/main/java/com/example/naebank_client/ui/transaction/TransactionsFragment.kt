@@ -9,6 +9,7 @@ import com.example.naebank_client.databinding.FragmentTransactionsBinding
 import com.example.naebank_client.ui.AddActivity
 import com.example.naebank_client.ui.BaseFragment
 import com.example.naebank_client.ui.card.CardListAdapter
+import java.util.Optional
 
 class TransactionsFragment : BaseFragment() {
 

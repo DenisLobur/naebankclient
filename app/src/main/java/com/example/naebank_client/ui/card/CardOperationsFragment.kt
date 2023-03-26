@@ -2,15 +2,18 @@ package com.example.naebank_client.ui.card
 
 import android.os.Bundle
 import android.text.Editable
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.core.widget.doAfterTextChanged
+import androidx.lifecycle.Observer
 import com.example.naebank_client.databinding.FragmentCardOperationsBinding
 import com.example.naebank_client.ui.AddActivity
 import com.example.naebank_client.ui.BaseFragment
+import com.example.naebank_client.ui.observeOnce
 
 class CardOperationsFragment : BaseFragment() {
   private lateinit var binding: FragmentCardOperationsBinding
@@ -20,7 +23,9 @@ class CardOperationsFragment : BaseFragment() {
   private var cardName: String = ""
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-    binding = FragmentCardOperationsBinding.inflate(inflater, container, false)
+    binding = FragmentCardOperationsBinding.inflate(inflater, container, false).apply {
+      lifecycleOwner = viewLifecycleOwner
+    }
 
     cardId = arguments?.getLong(CARD_ID) ?: 0L
     balance = arguments?.getInt(BALANCE) ?: 0
@@ -39,7 +44,8 @@ class CardOperationsFragment : BaseFragment() {
       }
     }
 
-    vm.onCardUpdated.observe(viewLifecycleOwner) {
+    vm.onCardUpdated.observeOnce(viewLifecycleOwner, Observer {
+      Log.d("denys", "onCardUpdated called")
       vm.addTransaction(
         cardId = cardId,
         amount = binding.amount.text.toString().toInt(),
@@ -48,7 +54,8 @@ class CardOperationsFragment : BaseFragment() {
 
       Toast.makeText(requireActivity(), "SUCCESS", Toast.LENGTH_SHORT).show()
       (requireActivity() as AddActivity).supportFragmentManager.popBackStack()
-    }
+    })
+
     return binding.root
   }
 
@@ -60,6 +67,7 @@ class CardOperationsFragment : BaseFragment() {
     }
 
     binding.doIt.setOnClickListener {
+      Log.d("denys", "do it called")
       vm.updateCardBalance(cardId, binding.amount.text.toString().toInt(), operation)
     }
 
@@ -77,6 +85,11 @@ class CardOperationsFragment : BaseFragment() {
     } else {
       binding.doIt.isEnabled = true
     }
+  }
+
+  override fun onStop() {
+    super.onStop()
+//    vm.onCardUpdated.removeObserver(Observer { observer})
   }
 
   companion object {

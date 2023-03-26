@@ -24,7 +24,7 @@ class CardListAdapter(val click: OnCardClick) : RecyclerView.Adapter<CardListAda
   class Holder(val binding: ItemCardBinding, val onClickListener: OnCardClick) : RecyclerView.ViewHolder(binding.root) {
     fun bind(card: Data.CardResponse) {
       binding.cardType.text = card.type
-      binding.cardMask.text = card.mask
+      binding.cardMask.text = "****${card.mask}"
       binding.cardExp.text = "Exp.: ${card.expMonth}/${card.expYear}"
 
       binding.contentHolder.setOnClickListener {

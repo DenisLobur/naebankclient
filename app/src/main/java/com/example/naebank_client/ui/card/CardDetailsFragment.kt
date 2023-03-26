@@ -10,6 +10,7 @@ import androidx.core.os.bundleOf
 import com.example.naebank_client.databinding.FragmentCardDetailsBinding
 import com.example.naebank_client.ui.AddActivity
 import com.example.naebank_client.ui.BaseFragment
+import java.util.Optional
 
 class CardDetailsFragment : BaseFragment() {
   private lateinit var binding: FragmentCardDetailsBinding
@@ -33,6 +34,12 @@ class CardDetailsFragment : BaseFragment() {
       balance = card.amount
 
       cardName = card.type + " " + card.mask
+    }
+
+    vm.onTransactionsResult.observe(viewLifecycleOwner) {
+      val transactionsAdapter = CardsTransactionsAdapter()
+      transactionsAdapter.setData(it)
+      binding.cardsTransactionsRv.adapter = transactionsAdapter
     }
 
     vm.onCardDeleted.observe(viewLifecycleOwner) {
@@ -59,7 +66,7 @@ class CardDetailsFragment : BaseFragment() {
     }
 
     binding.cardWithdrawBtn.setOnClickListener {
-      (requireActivity() as AddActivity).topUpFragment(
+      (requireActivity() as AddActivity).switchFragment(
         CardOperationsFragment.getInstance(
           cardId = cardId!!,
           cardName = cardName!!,
@@ -69,7 +76,7 @@ class CardDetailsFragment : BaseFragment() {
     }
 
     binding.cardTopupBtn.setOnClickListener {
-      (requireActivity() as AddActivity).topUpFragment(
+      (requireActivity() as AddActivity).switchFragment(
         CardOperationsFragment.getInstance(
           cardId = cardId!!,
           cardName = cardName!!,
@@ -86,6 +93,7 @@ class CardDetailsFragment : BaseFragment() {
   override fun onResume() {
     super.onResume()
     vm.getCardById(cardId ?: 0)
+    vm.getTransactionsByUserId(userId!!, cardId)
   }
 
   companion object {

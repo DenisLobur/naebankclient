@@ -26,8 +26,8 @@
       android:layout_marginTop="40dp"
       android:text="here's your card details"
       android:textAllCaps="true"
-      android:textStyle="bold"
       android:textSize="20sp"
+      android:textStyle="bold"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent" />
@@ -70,8 +70,8 @@
       android:layout_marginTop="40dp"
       android:layout_marginEnd="10dp"
       android:text="Mask:"
-      android:textColor="@color/black"
       android:textAllCaps="true"
+      android:textColor="@color/black"
       app:layout_constraintEnd_toStartOf="@id/center_vertical"
       app:layout_constraintTop_toTopOf="@id/card_type_label" />
 
@@ -94,8 +94,8 @@
       android:layout_marginTop="40dp"
       android:layout_marginEnd="10dp"
       android:text="Expiration Month:"
-      android:textColor="@color/black"
       android:textAllCaps="true"
+      android:textColor="@color/black"
       app:layout_constraintEnd_toStartOf="@id/center_vertical"
       app:layout_constraintTop_toTopOf="@id/card_mask_label" />
 
@@ -118,8 +118,8 @@
       android:layout_marginTop="40dp"
       android:layout_marginEnd="10dp"
       android:text="Expiration Year:"
-      android:textColor="@color/black"
       android:textAllCaps="true"
+      android:textColor="@color/black"
       app:layout_constraintEnd_toStartOf="@id/center_vertical"
       app:layout_constraintTop_toTopOf="@id/card_exp_month_label" />
 
@@ -142,8 +142,8 @@
       android:layout_marginTop="40dp"
       android:layout_marginEnd="10dp"
       android:text="balance:"
-      android:textColor="@color/black"
       android:textAllCaps="true"
+      android:textColor="@color/black"
       app:layout_constraintEnd_toStartOf="@id/center_vertical"
       app:layout_constraintTop_toTopOf="@id/card_exp_year_label" />
 
@@ -165,16 +165,16 @@
       android:layout_width="0dp"
       android:layout_height="45dp"
       android:layout_gravity="center_horizontal"
+      android:layout_marginStart="20dp"
       android:layout_marginTop="20dp"
+      android:layout_marginEnd="20dp"
       android:background="@drawable/selector_login_btn"
       android:text="withdraw"
       android:textAllCaps="true"
       android:textColor="@color/white"
       android:textSize="14sp"
-      app:layout_constraintStart_toStartOf="parent"
-      android:layout_marginStart="20dp"
-      android:layout_marginEnd="20dp"
       app:layout_constraintEnd_toStartOf="@id/center_vertical"
+      app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/card_balance_label" />
 
   <Button
@@ -183,16 +183,16 @@
       android:layout_width="0dp"
       android:layout_height="45dp"
       android:layout_gravity="center_horizontal"
+      android:layout_marginStart="20dp"
       android:layout_marginTop="20dp"
+      android:layout_marginEnd="20dp"
       android:background="@drawable/selector_login_btn"
       android:text="top-up"
       android:textAllCaps="true"
       android:textColor="@color/white"
       android:textSize="14sp"
       app:layout_constraintEnd_toEndOf="parent"
-      android:layout_marginEnd="20dp"
       app:layout_constraintStart_toEndOf="@id/center_vertical"
-      android:layout_marginStart="20dp"
       app:layout_constraintTop_toBottomOf="@id/card_balance_label" />
 
   <Button
@@ -211,4 +211,29 @@
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/card_withdraw_btn" />
+
+  <TextView
+      android:id="@+id/transactions_label"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="20dp"
+      android:layout_marginTop="40dp"
+      android:text="Transactions:"
+      android:textAllCaps="true"
+      android:textColor="@color/black"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/card_delete_btn" />
+
+  <androidx.recyclerview.widget.RecyclerView
+      android:id="@+id/cards_transactions_rv"
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_marginTop="10dp"
+      app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/transactions_label"
+      tools:itemCount="3"
+      tools:listitem="@layout/item_card_transaction"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -13,7 +13,9 @@ class CardsFragment : BaseFragment() {
   private lateinit var binding: FragmentCardsBinding
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-    binding = FragmentCardsBinding.inflate(inflater, container, false)
+    binding = FragmentCardsBinding.inflate(inflater, container, false).apply {
+      lifecycleOwner = viewLifecycleOwner
+    }
 
     vm.onCardsResult.observe(viewLifecycleOwner) {
       binding.hasCards = it.isNotEmpty()

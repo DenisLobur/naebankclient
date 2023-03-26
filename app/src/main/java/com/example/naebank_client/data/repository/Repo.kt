@@ -7,6 +7,7 @@ import kotlinx.coroutines.withContext
 import com.example.naebank_client.Result.*
 import com.example.naebank_client.data.Data
 import com.example.naebank_client.ui.card.CardOperationsFragment
+import java.util.Optional
 import kotlin.random.Random
 
 class Repo(val api: ApiService, val errorParser: ErrorParser) {
@@ -146,11 +147,11 @@ class Repo(val api: ApiService, val errorParser: ErrorParser) {
     ).request()
   }
 
-  suspend fun getTransactionsByUserId(id: Long) = withContext(Dispatchers.IO) {
+  suspend fun getTransactionsByUserId(id: Long, cardId: Long?) = withContext(Dispatchers.IO) {
     RequestHandler(
       errorParser = errorParser,
       onRequest = {
-        api.getTransactionsByUserId(userId = id)
+        api.getTransactionsByUserId(userId = id, cardId = cardId)
       },
       onResult = {
         Success(it)
