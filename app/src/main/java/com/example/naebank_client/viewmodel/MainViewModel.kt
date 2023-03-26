@@ -24,7 +24,9 @@ class MainViewModel(val repo: Repo) : ViewModel() {
   val onCardAdded = MutableLiveData<Data.GeneralResponse?>()
   val onCardUpdated = MutableLiveData<Data.CardResponse>()
   val onCardDeleted = MutableLiveData<Data.GeneralResponse>()
+  val onTransactionsResult = MutableLiveData<List<Data.TransactionResponse>>()
   val onTransactionAdded = MutableLiveData<Data.GeneralResponse?>()
+
 
   fun registerUser(name: String, email: String, password: String) {
     isLoading.set(true)
@@ -83,7 +85,7 @@ class MainViewModel(val repo: Repo) : ViewModel() {
     isLoading.set(true)
 
     viewModelScope.launch {
-      when (val cards = repo.getCards(id = id)) {
+      when (val cards = repo.getCardsByUserId(id = id)) {
         is Success -> {
           onCardsResult.value = cards.data!!
         }
@@ -96,11 +98,11 @@ class MainViewModel(val repo: Repo) : ViewModel() {
     }
   }
 
-  fun getCardById(userId: Long, cardId: Long) {
+  fun getCardById(cardId: Long) {
     isLoading.set(true)
 
     viewModelScope.launch {
-      when (val cards = repo.getCardById(userId, cardId)) {
+      when (val cards = repo.getCardById(cardId)) {
         is Success -> {
           onCardResult.value = cards.data!!
         }
@@ -120,23 +122,6 @@ class MainViewModel(val repo: Repo) : ViewModel() {
       when (val card = repo.addCard(type, mask, expMonth, expYear, isDefault)) {
         is Success -> {
           onCardAdded.value = card.data
-        }
-        is Error -> {
-          onError.value = card.toString()
-        }
-      }
-
-      isLoading.set(false)
-    }
-  }
-
-  fun addTransaction(cardId: Long, amount: Int, type: String, cardName: String, status: String) {
-    isLoading.set(true)
-
-    viewModelScope.launch {
-      when (val card = repo.addTransaction(cardId, amount, type, cardName, status)) {
-        is Success -> {
-          onTransactionAdded.value = card.data
         }
         is Error -> {
           onError.value = card.toString()
@@ -174,6 +159,40 @@ class MainViewModel(val repo: Repo) : ViewModel() {
         }
         is Error -> {
           onError.value = deleteCard.toString()
+        }
+      }
+
+      isLoading.set(false)
+    }
+  }
+
+  fun addTransaction(cardId: Long, amount: Int, transactionType: String) {
+    isLoading.set(true)
+
+    viewModelScope.launch {
+      when (val card = repo.addTransaction(cardId, amount, transactionType)) {
+        is Success -> {
+          onTransactionAdded.value = card.data
+        }
+        is Error -> {
+          onError.value = card.toString()
+        }
+      }
+
+      isLoading.set(false)
+    }
+  }
+
+  fun getTransactionsByUserId(id: Long) {
+    isLoading.set(true)
+
+    viewModelScope.launch {
+      when (val trans = repo.getTransactionsByUserId(id = id)) {
+        is Success -> {
+          onTransactionsResult.value = trans.data!!
+        }
+        is Error -> {
+          onError.value = trans.toString()
         }
       }
 

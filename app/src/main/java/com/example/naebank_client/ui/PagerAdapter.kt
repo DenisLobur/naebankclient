@@ -9,7 +9,6 @@ import com.example.naebank_client.ui.transaction.TransactionsFragment
 import com.example.naebank_client.ui.user.UserFragment
 
 class PagerAdapter(fm: FragmentManager, lifecycle: Lifecycle) : FragmentStateAdapter(fm, lifecycle) {
-
   override fun getItemCount(): Int = 3
 
   override fun createFragment(position: Int): Fragment {

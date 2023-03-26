@@ -85,7 +85,7 @@ class CardDetailsFragment : BaseFragment() {
 
   override fun onResume() {
     super.onResume()
-    vm.getCardById(userId ?: 0, cardId ?: 0)
+    vm.getCardById(cardId ?: 0)
   }
 
   companion object {

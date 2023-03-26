@@ -7,6 +7,7 @@ import kotlinx.coroutines.withContext
 import com.example.naebank_client.Result.*
 import com.example.naebank_client.data.Data
 import com.example.naebank_client.ui.card.CardOperationsFragment
+import kotlin.random.Random
 
 class Repo(val api: ApiService, val errorParser: ErrorParser) {
   suspend fun registerUser(name: String, email: String, password: String) = withContext(Dispatchers.IO) {
@@ -57,11 +58,11 @@ class Repo(val api: ApiService, val errorParser: ErrorParser) {
     ).request()
   }
 
-  suspend fun getCards(id: Long) = withContext(Dispatchers.IO) {
+  suspend fun getCardsByUserId(id: Long) = withContext(Dispatchers.IO) {
     RequestHandler(
       errorParser = errorParser,
       onRequest = {
-        api.getCards(userId = id)
+        api.getCardsByUserId(userId = id)
       },
       onResult = {
         Success(it)
@@ -69,7 +70,7 @@ class Repo(val api: ApiService, val errorParser: ErrorParser) {
     ).request()
   }
 
-  suspend fun getCardById(userId: Long, cardId: Long) = withContext(Dispatchers.IO) {
+  suspend fun getCardById(cardId: Long) = withContext(Dispatchers.IO) {
     RequestHandler(
       errorParser = errorParser,
       onRequest = {
@@ -104,8 +105,12 @@ class Repo(val api: ApiService, val errorParser: ErrorParser) {
       errorParser = errorParser,
       onRequest = {
         when (operation) {
-          CardOperationsFragment.Companion.OPERATION.WITHDRAW -> api.updateCard(Data.CardAmountRequest(id, -amount))
-          CardOperationsFragment.Companion.OPERATION.TOPUP -> api.updateCard(Data.CardAmountRequest(id, amount))
+          CardOperationsFragment.Companion.OPERATION.WITHDRAW -> {
+            api.updateCard(Data.CardAmountRequest(id, -amount))
+          }
+          CardOperationsFragment.Companion.OPERATION.TOPUP -> {
+            api.updateCard(Data.CardAmountRequest(id, amount))
+          }
         }
       },
       onResult = {
@@ -126,16 +131,26 @@ class Repo(val api: ApiService, val errorParser: ErrorParser) {
     ).request()
   }
 
-  suspend fun addTransaction(cardId: Long, amount: Int, type: String, cardName: String, status: String) = withContext(Dispatchers.IO) {
+  suspend fun addTransaction(cardId: Long, amount: Int, transactionType: String) = withContext(Dispatchers.IO) {
     RequestHandler(
       errorParser = errorParser,
       onRequest = {
-        api.addTransaction(
-          cardId,
-          Data.TransactionRequest(
-            amount, type, cardName, status
-          )
-        )
+        val statuses = listOf<String>("Pending", "Success", "Rejected")
+        val statusRandIdx = Random.nextInt(statuses.size)
+
+        api.addTransaction(cardId, request = Data.TransactionRequest(amount, transactionType, statuses[statusRandIdx]))
+      },
+      onResult = {
+        Success(it)
+      }
+    ).request()
+  }
+
+  suspend fun getTransactionsByUserId(id: Long) = withContext(Dispatchers.IO) {
+    RequestHandler(
+      errorParser = errorParser,
+      onRequest = {
+        api.getTransactionsByUserId(userId = id)
       },
       onResult = {
         Success(it)

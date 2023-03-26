@@ -25,16 +25,15 @@ object Data {
     @SerializedName("isDefault") val isDefault: Boolean
   )
 
-  data class TransactionRequest(
-    @SerializedName("amount") val amount: Int,
-    @SerializedName("type") val type: String,
-    @SerializedName("cardName") val cardName: String,
-    @SerializedName("status") val status: String
-  )
-
   data class CardAmountRequest(
     @SerializedName("id") val id: Long,
     @SerializedName("amount") val amount: Int
+  )
+
+  data class TransactionRequest(
+    @SerializedName("amount") val amount: Int,
+    @SerializedName("type") val type: String,
+    @SerializedName("status") val status: String,
   )
 
   // Response
@@ -63,5 +62,14 @@ object Data {
     @SerializedName("expYear") val expYear: Int,
     @SerializedName("isDefault") val isDefault: Boolean,
     @SerializedName("amount") val amount: Int
+  )
+
+  data class TransactionResponse(
+    @SerializedName("id") val id: Long,
+    @SerializedName("amount") val amount: Int,
+    @SerializedName("type") val type: String,
+    @SerializedName("cardName") val cardName: String,
+    @SerializedName("status") val status: String,
+    @SerializedName("date") val date: Long?
   )
 }

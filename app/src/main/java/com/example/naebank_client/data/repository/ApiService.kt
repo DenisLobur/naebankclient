@@ -20,7 +20,7 @@ interface ApiService {
   suspend fun getCurrentUser(): Response<Data.UserResponse>
 
   @GET("cards")
-  suspend fun getCards(
+  suspend fun getCardsByUserId(
     @Query("user_id") userId: Long
   ): Response<List<Data.CardResponse>>
 
@@ -49,4 +49,9 @@ interface ApiService {
     @Path("cardId") cardId: Long,
     @Body request: Data.TransactionRequest
   ): Response<Data.GeneralResponse>
+
+  @GET("transactions")
+  suspend fun getTransactionsByUserId(
+    @Query("user_id") userId: Long
+  ): Response<List<Data.TransactionResponse>>
 }

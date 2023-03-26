@@ -43,9 +43,7 @@ class CardOperationsFragment : BaseFragment() {
       vm.addTransaction(
         cardId = cardId,
         amount = binding.amount.text.toString().toInt(),
-        type = operation.name,
-        cardName = cardName,
-        status = "success"
+        transactionType = operation.name
       )
 
       Toast.makeText(requireActivity(), "SUCCESS", Toast.LENGTH_SHORT).show()

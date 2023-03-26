@@ -38,7 +38,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:paddingHorizontal="20dp"
-        android:text="Your cards will apear here when you add them"
+        android:text="Your cards will appear here when you add them"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -49,12 +49,13 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/cards_rv"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginTop="40dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/add_card_button"
+        app:layout_constraintBottom_toBottomOf="parent"
         tools:itemCount="2"
         tools:listitem="@layout/item_card" />
 
